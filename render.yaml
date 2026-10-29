@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: music-playlist-manager
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DATABASE_PATH
+        value: /var/data/music_manager.db
+    disk:
+      name: music-data
+      mountPath: /var/data
+      sizeGB: 1
